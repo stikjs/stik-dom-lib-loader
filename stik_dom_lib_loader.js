@@ -1,8 +1,8 @@
 (function(){
   stik.boundary({
     as: "tpl",
-    from: "controller|behavior",
-    call: true,
+    from: "all",
+    resolvable: true,
     to: function($template){
       if (window.hasOwnProperty("MooTools")) {
         return window.document.id($template);
@@ -14,4 +14,5 @@
 
       throw "no library found";
     }
+  });
 })():
