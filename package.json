@@ -1,0 +1,36 @@
+{
+  "name": "stik-dom-lib-loader.js",
+  "version": "0.2.0",
+  "description": "Automatic injection of the most popular DOM libraries for Stik.js",
+  "main": "stik-dom-lib-loader.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:stikjs/stik-dom-lib-loader.git"
+  },
+  "keywords": [
+    "stik",
+    "jquery",
+    "mootools",
+    "zepto"
+  ],
+  "author": "Lukas Alexandre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stikjs/stik-dom-lib-loader.git/issues"
+  },
+  "homepage": "https://github.com/stikjs/stik-dom-lib-loader.git",
+  "dependencies": {
+    "stik.js": "1.x",
+    "stik-helpers.js": "0.x"
+  },
+  "devDependencies": {
+    "stik-labs.js": "0.x",
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.11",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-jasmine": "~0.5.2"
+  }
+}
