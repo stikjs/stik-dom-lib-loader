@@ -1,49 +1,64 @@
-describe("DOM Lib Loader", function(){
-  it("should delegate to Mootools", function(){
-    var $window = {
-      MooTools: {},
-      document: {
-        id: jasmine.createSpy("MooToolsSelectorMock")
-      }
-    };
+GLOBAL.window = {};
+var window = GLOBAL.window;
 
-    stik.labs.boundary({
+require("stik-core");
+require("stik-labs");
+require("./src/tpl_wrapper");
+require("./src/tpl");
+
+describe("DOM Lib Loader", function(){
+  it("should fail when no DOM lib is found", function(){
+    var lab = window.stik.labs.boundary({
       name: "tpl"
-    }).run({
-      $template: '',
-      $window: $window
     });
 
-    expect($window.document.id).toHaveBeenCalled();
+    expect(function(){
+      lab.run({ $template: "" });
+    }).toThrow("no DOM library found");
+  });
+
+  it("should delegate to Mootools", function(){
+    window.MooTools = {};
+    window.document = {
+      id: jasmine.createSpy("MooToolsSelectorMock")
+    };
+
+    window.stik.labs.boundary({
+      name: "tpl"
+    }).run({
+      $template: ""
+    });
+
+    expect(window.document.id).toHaveBeenCalled();
+
+    delete window.MooTools;
   });
 
   it("should delegate as jQuery", function(){
-    var $window = {
-      jQuery: jasmine.createSpy("jQuerySelectorMock")
-    };
+    window.jQuery = jasmine.createSpy("jQuerySelectorMock");
 
-    stik.labs.boundary({
+    window.stik.labs.boundary({
       name: "tpl"
     }).run({
-      $template: '',
-      $window: $window
+      $template: ""
     });
 
-    expect($window.jQuery).toHaveBeenCalled();
+    expect(window.jQuery).toHaveBeenCalled();
+
+    delete window.jQuery;
   });
 
   it("should delegate to Zepto", function(){
-    var $window = {
-      Zepto: jasmine.createSpy("ZeptoSelectorMock")
-    };
+    window.Zepto = jasmine.createSpy("ZeptoSelectorMock");
 
-    stik.labs.boundary({
+    window.stik.labs.boundary({
       name: "tpl"
     }).run({
-      $template: '',
-      $window: $window
+      $template: ""
     });
 
-    expect($window.Zepto).toHaveBeenCalled();
+    expect(GLOBAL.window.Zepto).toHaveBeenCalled();
+
+    delete window.Zepto;
   });
 });
